@@ -18,10 +18,15 @@ package org.springframework.social.showcase.facebook;
 import javax.inject.Inject;
 
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.social.facebook.api.PagedList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FacebookFriendsController {
@@ -35,7 +40,16 @@ public class FacebookFriendsController {
 
 	@RequestMapping(value="/facebook/friends", method=RequestMethod.GET)
 	public String showFeed(Model model) {
-		model.addAttribute("friends", facebook.friendOperations().getFriendProfiles());
+		List<FacebookProfile> profiles=new ArrayList<FacebookProfile>();
+//		model.addAttribute("friends", facebook.friendOperations().getFriendProfiles());
+		List<String> friendIds = facebook.friendOperations().getFriendIds();
+		System.out.println(friendIds.size());
+		for(String s:friendIds) {
+			FacebookProfile firstFriend = facebook.userOperations().getUserProfile(s);
+			profiles.add(firstFriend);
+			System.out.println(firstFriend.getName());
+		}
+		model.addAttribute("friends", profiles);
 		return "facebook/friends";
 	}
 	

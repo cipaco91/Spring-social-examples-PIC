@@ -18,6 +18,8 @@ package org.springframework.social.showcase.facebook;
 import javax.inject.Inject;
 
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,10 @@ public class FacebookFeedController {
 	@RequestMapping(value="/facebook/feed", method=RequestMethod.GET)
 	public String showFeed(Model model) {
 		model.addAttribute("feed", facebook.feedOperations().getFeed());
+		PagedList<Post> posts=facebook.feedOperations().getFeed();
+//		for(Post post:posts){
+//			System.out.println(post.getT());
+//		}
 		return "facebook/feed";
 	}
 	
