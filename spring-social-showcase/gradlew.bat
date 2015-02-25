@@ -9,6 +9,7 @@
 if "%OS%"=="Windows_NT" setlocal
 
 @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+set GRADLE_OPTS=-XX:MaxPermSize=700m -Xmx700m -XX:MaxHeapSize=256m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 %GRADLE_OPTS%
 set DEFAULT_JVM_OPTS=
 
 set DIRNAME=%~dp0

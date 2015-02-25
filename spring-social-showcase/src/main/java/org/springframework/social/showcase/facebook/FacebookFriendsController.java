@@ -40,17 +40,16 @@ public class FacebookFriendsController {
 
 	@RequestMapping(value="/facebook/friends", method=RequestMethod.GET)
 	public String showFeed(Model model) {
-		List<FacebookProfile> profiles=new ArrayList<FacebookProfile>();
-//		model.addAttribute("friends", facebook.friendOperations().getFriendProfiles());
-		List<String> friendIds = facebook.friendOperations().getFriendIds();
-		System.out.println(friendIds.size());
-		for(String s:friendIds) {
-			FacebookProfile firstFriend = facebook.userOperations().getUserProfile(s);
-			profiles.add(firstFriend);
-			System.out.println(firstFriend.getName());
-		}
-		model.addAttribute("friends", profiles);
+//		List<FacebookProfile> profiles=new ArrayList<FacebookProfile>();
+		model.addAttribute("friends", facebook.friendOperations().getFriends());
+//		List<String> friendIds = facebook.friendOperations().getFriendIds();
+//		System.out.println(friendIds.size());
+//		for(String s:friendIds) {
+//			FacebookProfile firstFriend = facebook.userOperations().getUserProfile(s);
+//			profiles.add(firstFriend);
+//			System.out.println(firstFriend.getName());
+//		}
+//		model.addAttribute("friends", profiles);
 		return "facebook/friends";
 	}
-	
 }
